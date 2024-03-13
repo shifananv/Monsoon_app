@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:monsoonapp/favourite.dart';
+import 'package:monsoonapp/homepage.dart';
+import 'package:monsoonapp/profile.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({Key? key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  int _selectedIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +31,11 @@ class _SearchScreenState extends State<SearchScreen> {
           GestureDetector(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const FavouriteScreen()),
-                );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FavouriteScreen(),
+                ),
+              );
             },
             child: Container(
               width: 380,
@@ -150,7 +162,9 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           const Padding(
             padding: EdgeInsets.only(left: 260),
             child: Text(
@@ -165,9 +179,63 @@ class _SearchScreenState extends State<SearchScreen> {
                 letterSpacing: 0.45,
               ),
             ),
-          )
+          ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    },
+                    child: Image.asset('assets/images/home.png')),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SearchScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/search.png')),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FavouriteScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/love.png')),
+                label: 'Favorites',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/profile.png')),
+                label: 'Profile',
+              ),
+            ],
+          ),
     );
   }
 }

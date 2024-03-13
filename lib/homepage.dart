@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monsoonapp/favourite.dart';
 import 'package:monsoonapp/imagecontainer.dart';
+import 'package:monsoonapp/profile.dart';
 import 'package:monsoonapp/search_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,6 +254,60 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    },
+                    child: Image.asset('assets/images/home.png')),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SearchScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/search.png')),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FavouriteScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/love.png')),
+                label: 'Favorites',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/profile.png')),
+                label: 'Profile',
+              ),
+            ],
+          ),
     );
   }
 }

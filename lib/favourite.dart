@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:monsoonapp/homepage.dart';
 import 'package:monsoonapp/imagecontainer.dart';
 import 'package:monsoonapp/profile.dart';
+import 'package:monsoonapp/search_screen.dart';
 
 class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({super.key});
+  const FavouriteScreen({Key? key});
 
   @override
   State<FavouriteScreen> createState() => _FavouriteScreenState();
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFD9D9D9),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:GestureDetector(
+        title: GestureDetector(
           onTap: () {
             Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
-                );
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            );
           },
           child: const Text(
             'My Favourites ',
@@ -37,85 +47,150 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         ),
         backgroundColor: Colors.white,
       ),
-      body: const Column(
+      body: Column(
+        mainAxisSize: MainAxisSize.max, // Ensure the Column takes full height
         children: [
-          Row(
+          const Expanded(
+            child: Column(
               children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 18,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/middleplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  width: 18,
+                  height: 40,
                 ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 18,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/middleplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 10,
+                  height: 40,
                 ),
-                ImageContainer(
-                  imagePath: "assets/images/middleplace.png",
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
-                ),
-                SizedBox(
-                  width: 18,
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 18,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/middleplace.png",
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ImageContainer(
+                      imagePath: "assets/images/edgeplace.png",
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(height: 40,),
-            Row(
-              children: [
-                SizedBox(
-                  width: 18,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/middleplace.png",
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
-                ),
-                SizedBox(
-                  width: 18,
-                ),
-              ],
-            ),
-            SizedBox(height: 40,),
-            Row(
-              children: [
-                SizedBox(
-                  width: 18,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/middleplace.png",
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ImageContainer(
-                  imagePath: "assets/images/edgeplace.png",
-                ),
-                SizedBox(
-                  width: 18,
-                ),
-              ],
-            ),
+          ),
+          BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    },
+                    child: Image.asset('assets/images/home.png')),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SearchScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/search.png')),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FavouriteScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/love.png')),
+                label: 'Favorites',
+              ),
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileScreen()),
+                      );
+                    },
+                    child: Image.asset('assets/images/profile.png')),
+                label: 'Profile',
+              ),
+            ],
+          ),
         ],
       ),
     );

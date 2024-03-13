@@ -65,6 +65,10 @@ flutter:
     - assets/images/middleplace.png
     - assets/images/clock.png
     - assets/images/user.png
+    - assets/images/home.png
+    - assets/images/search.png
+    - assets/images/love.png
+    - assets/images/profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
